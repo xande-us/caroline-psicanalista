@@ -288,7 +288,8 @@ em {
   box-shadow: 0 40px 80px -30px rgba(52, 40, 29, 0.25);
 }
 .hero-image-mask img {
-  width: 145%;
+  width: 165%;
+  margin-left: -6%;
   max-width: none;
   aspect-ratio: 4/5;
   object-fit: cover;
