@@ -290,7 +290,7 @@ em {
 .hero-image-mask img {
   aspect-ratio: 4/5;
   object-fit: cover;
-  object-position: 40% 45%;
+  object-position: 50% 25%;
   will-change: transform;
 }
 .hero-caption {
