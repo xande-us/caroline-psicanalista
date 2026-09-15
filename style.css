@@ -743,9 +743,10 @@ em {
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--line);
-  padding: 10px 2px;
+  padding: 12px 2px;
   font-family: var(--font-body);
-  font-size: 0.94rem;
+  /* 16px evita o zoom automático do iOS ao focar o campo */
+  font-size: 1rem;
   color: var(--ink);
   resize: none;
   transition: border-color 0.3s ease;
@@ -809,4 +810,18 @@ em {
 
 @media (max-width: 480px) {
   .whatsapp-float { width: 50px; height: 50px; bottom: 18px; right: 18px; }
+}
+
+/* ==========================================================================
+   REFINAMENTO MOBILE — ritmo vertical mais compacto em telas pequenas
+   ========================================================================== */
+@media (max-width: 600px) {
+  .section { padding: 74px 0; }
+  .hero { padding: 128px 0 64px; }
+  .section-intro.reveal { margin-bottom: 48px; }
+  .encontro-intro { margin-bottom: 48px; }
+  .encontro-close { margin-top: 52px; }
+  /* Título do hero um pouco menor no celular, para caber com folga */
+  .hero-title { font-size: clamp(2.1rem, 8.5vw, 3rem); }
+  .container { padding: 0 22px; }
 }
