@@ -344,13 +344,17 @@ em {
 @media (max-width: 560px) {
   .hero-card { position: static; max-width: none; margin-top: 40px; }
 }
+/* Enquadramento do hero: a foto (3:4) é ampliada dentro da máscara (4:5) para um
+   recorte de retrato focado na Caroline. O recorte horizontal vem do overflow da
+   largura + margin (em % da máscara, portanto consistente em qualquer viewport);
+   object-position controla o eixo vertical (mais alto = mostra melhor o rosto). */
 .hero-image-mask img {
-  width: 165%;
+  width: 158%;
   margin-left: -6%;
   max-width: none;
   aspect-ratio: 4/5;
   object-fit: cover;
-  object-position: 50% 25%;
+  object-position: 50% 20%;
   will-change: transform;
 }
 .hero-caption {
