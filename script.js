@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CAROLINE ANDRADE — PSICANALISTA
+   CAROLINE COCONESI — PSICANALISTA
    Vanilla JS — leve, sem dependências
    ========================================================================== */
 
@@ -104,23 +104,38 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach((el) => el.classList.add('is-visible'));
   }
 
-  /* ---------- Formulário de contato ---------- */
+  /* ---------- Formulário de contato ----------
+     PENDENTE: o formulário ainda NÃO envia e-mail de verdade. Falta o e-mail de
+     destino da Caroline para configurar o backend (Formspree/EmailJS/rota
+     serverless). Enquanto isso, apenas exibimos confirmação visual, sem persistir
+     nem enviar os dados. Não conectar a nenhum destino sem o e-mail confirmado. */
   const form = document.getElementById('contact-form');
   const formNote = document.getElementById('form-note');
+  const defaultNote = formNote ? formNote.textContent : '';
 
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      // Placeholder — conectar a um endpoint real (Formspree, EmailJS, function serverless etc.)
       const nome = form.nome.value.trim();
+      const primeiroNome = nome ? nome.split(' ')[0] : '';
 
       if (formNote) {
-        formNote.textContent = `Obrigada, ${nome.split(' ')[0]}! Sua mensagem foi recebida — responderei em breve.`;
-        formNote.style.color = 'var(--moss)';
+        formNote.textContent = primeiroNome
+          ? `Obrigada, ${primeiroNome}! Assim que o envio estiver ativo, sua mensagem chega direto para a Caroline.`
+          : 'Assim que o envio estiver ativo, sua mensagem chega direto para a Caroline.';
+        formNote.style.color = 'var(--terracotta)';
       }
 
       form.reset();
+
+      // Restaura o microcopy padrão depois de alguns segundos
+      if (formNote) {
+        setTimeout(() => {
+          formNote.textContent = defaultNote;
+          formNote.style.color = '';
+        }, 6000);
+      }
     });
   }
 
