@@ -46,6 +46,9 @@ h1, h2, h3 {
   color: var(--ink);
   line-height: 1.18;
   letter-spacing: -0.015em;
+  /* Equilibra o comprimento das linhas dos títulos (sem os "rios" da justificação).
+     Navegadores sem suporte simplesmente ignoram e mantêm a quebra normal. */
+  text-wrap: balance;
 }
 h3 { font-weight: 700; }
 em {
