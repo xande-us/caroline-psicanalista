@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CAROLINE ANDRADE — PSICANALISTA
+   CAROLINE COCONESI — PSICANALISTA
    Direção editorial · assimétrica · orgânica
    ========================================================================== */
 
@@ -181,8 +181,18 @@ em {
   height: 70px;
 }
 
-.logo { display: flex; flex-direction: column; line-height: 1.2; }
-.logo-name { font-family: var(--font-display); font-size: 1.1rem; font-style: italic; }
+.logo { display: flex; align-items: center; gap: 12px; line-height: 1.2; }
+/* Placeholder do vetor da logo (lótus + mãos em concha) — círculo neutro,
+   sem tentar recriar o ícone oficial. Substituir por <img>/<svg> quando chegar. */
+.logo-mark {
+  flex-shrink: 0;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--terracotta);
+  background: var(--terracotta-soft);
+}
+.logo-text { display: flex; flex-direction: column; }
+.logo-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; }
 .logo-tag {
   font-size: 0.6rem;
   letter-spacing: 0.16em;
@@ -716,11 +726,14 @@ em {
 .footer-inner {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  gap: 14px;
   font-size: 0.78rem;
   color: var(--ink-soft);
   text-align: center;
 }
+.footer-brand { display: flex; align-items: center; gap: 12px; }
+.footer-brand .logo-mark { width: 34px; height: 34px; }
 @media (min-width: 700px) {
   .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; }
 }
