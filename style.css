@@ -182,14 +182,11 @@ em {
 }
 
 .logo { display: flex; align-items: center; gap: 12px; line-height: 1.2; }
-/* Placeholder do vetor da logo (lótus + mãos em concha) — círculo neutro,
-   sem tentar recriar o ícone oficial. Substituir por <img>/<svg> quando chegar. */
+/* Marca oficial (círculo com flor de lótus + mãos em concha) — assets/logo-mark.svg */
 .logo-mark {
   flex-shrink: 0;
   width: 42px; height: 42px;
-  border-radius: 50%;
-  border: 1px solid var(--terracotta);
-  background: var(--terracotta-soft);
+  display: block;
 }
 .logo-text { display: flex; flex-direction: column; }
 .logo-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; }
