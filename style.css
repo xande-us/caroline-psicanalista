@@ -116,8 +116,8 @@ em {
 .recog-card:nth-child(5) { transition-delay: 0.12s; }
 .recog-card:nth-child(6) { transition-delay: 0.18s; }
 
-.step:nth-child(2) { transition-delay: 0.15s; }
-.step:nth-child(3) { transition-delay: 0.3s; }
+.facet--b { transition-delay: 0.12s; }
+.facet--c { transition-delay: 0.24s; }
 
 .testimonial:nth-child(2) { transition-delay: 0.15s; }
 .testimonial:nth-child(3) { transition-delay: 0.3s; }
@@ -501,117 +501,80 @@ em {
 }
 
 /* ==========================================================================
-   COMO FUNCIONA — pull quote + timeline sobre o fio
+   O ENCONTRO CLÍNICO — intro assimétrica + facetas que coexistem (sem etapas)
    ========================================================================== */
-.how-intro-grid {
+.encontro-intro {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 40px;
-  margin-bottom: 90px;
-}
-@media (min-width: 900px) {
-  .how-intro-grid { grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
-}
-.how-intro-grid h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); margin: 14px 0 20px; }
-
-.pull-quote {
-  position: relative;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
-  color: var(--ink);
-  padding-left: 30px;
-  border-left: 1px solid var(--terracotta);
-}
-.quote-mark {
-  position: absolute;
-  left: -6px; top: -34px;
-  font-size: 4.5rem;
-  color: var(--terracotta);
-  opacity: 0.35;
-  font-family: var(--font-display);
-}
-
-.steps-track {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  position: relative;
-  padding-top: 10px;
-}
-@media (min-width: 900px) {
-  .steps-track {
-    flex-direction: row;
-    gap: 60px;
-  }
-  .steps-track::before {
-    content: '';
-    position: absolute;
-    top: 22px; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--line) 15%, var(--line) 85%, transparent);
-  }
-}
-
-.step { flex: 1; }
-.step-index {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
+  gap: 48px;
   align-items: center;
-  justify-content: center;
-  width: 44px; height: 44px;
-  border: 1px solid var(--terracotta);
-  border-radius: 50%;
-  background: var(--canvas);
-  font-family: var(--font-display);
-  font-style: italic;
-  color: var(--terracotta);
-  margin-bottom: 22px;
-}
-.step h3 { font-size: 1.08rem; margin-bottom: 10px; }
-.step p { color: var(--ink-soft); font-size: 0.92rem; max-width: 280px; }
-
-/* ==========================================================================
-   SOBRE — assimétrico
-   ========================================================================== */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 56px;
-  align-items: center;
+  margin-bottom: 72px;
 }
 @media (min-width: 900px) {
-  .about-grid { grid-template-columns: 0.85fr 1.15fr; gap: 90px; }
+  .encontro-intro { grid-template-columns: 0.8fr 1.2fr; gap: 80px; }
 }
 
-.about-media { max-width: 380px; }
-.about-image-mask {
+.encontro-media { max-width: 360px; }
+.encontro-image-mask {
   border-radius: 20px 120px 20px 120px;
   overflow: hidden;
   box-shadow: 0 40px 80px -30px rgba(35, 31, 32, 0.22);
 }
-.about-image-mask img { aspect-ratio: 5/6; object-fit: cover; }
-.about-media figcaption {
-  margin-top: 16px;
+.encontro-image-mask img { aspect-ratio: 5/6; object-fit: cover; width: 100%; }
+
+.encontro-lead h2 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); margin: 14px 0 22px; }
+.encontro-open {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 0.85rem;
-  color: var(--ink-soft);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 540px;
 }
 
-.about-copy h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); margin: 14px 0 22px; }
-.about-copy p { color: var(--ink-soft); margin-bottom: 18px; max-width: 520px; }
-.link-arrow {
-  display: inline-block;
-  margin-top: 10px;
-  font-weight: 500;
-  color: var(--ink);
-  border-bottom: 1px solid var(--terracotta);
-  padding-bottom: 3px;
-  transition: opacity 0.3s ease, letter-spacing 0.3s ease;
+/* Facetas — deslocadas verticalmente de propósito; coexistem, não são sequência.
+   Sem numeração, sem linha de tempo, sem grid idêntico. */
+.facets {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
 }
-.link-arrow:hover { opacity: 0.6; letter-spacing: 0.02em; }
+@media (min-width: 800px) {
+  .facets {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    align-items: start;
+  }
+  /* desalinhamento vertical entre os blocos */
+  .facet--a { margin-top: 0; }
+  .facet--b { margin-top: 52px; }
+  .facet--c { margin-top: 22px; }
+}
+
+.facet {
+  position: relative;
+  padding-left: 22px;
+  border-left: 2px solid var(--terracotta-soft);
+  max-width: 340px;
+}
+.facet::before {
+  content: '';
+  position: absolute;
+  left: -6px; top: 6px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--terracotta);
+}
+.facet h3 { font-size: 1.22rem; margin-bottom: 12px; font-style: italic; }
+.facet p { color: var(--ink-soft); font-size: 0.96rem; line-height: 1.7; }
+
+.encontro-close {
+  max-width: 720px;
+  margin: 72px auto 0;
+  text-align: center;
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+}
 
 /* ==========================================================================
    DEPOIMENTOS — masonry assimétrico
@@ -658,6 +621,15 @@ em {
   text-transform: uppercase;
 }
 
+/* Placeholder — depoimentos reais pendentes de autorização (nunca fabricar) */
+.testimonial--placeholder {
+  border-top-style: dashed;
+  opacity: 0.55;
+}
+.testimonial--placeholder p { font-style: italic; color: var(--ink-soft); }
+.testimonial--placeholder .testimonial-mark { opacity: 0.2; }
+.testimonial--placeholder cite { text-transform: none; letter-spacing: 0.02em; font-style: italic; }
+
 /* ==========================================================================
    FAQ — lista sem caixas
    ========================================================================== */
@@ -677,11 +649,21 @@ em {
   gap: 18px;
 }
 .faq-item summary::-webkit-details-marker { display: none; }
-.faq-num {
-  font-style: italic;
+
+/* Resposta ainda pendente de confirmação — placeholder explícito, não conteúdo final */
+.faq-pending { color: var(--ink-soft); font-style: italic; }
+.faq-flag {
+  display: inline-block;
+  margin-left: 6px;
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--terracotta);
-  font-size: 0.9rem;
-  flex-shrink: 0;
+  border: 1px solid var(--terracotta-soft);
+  border-radius: 20px;
+  padding: 2px 9px;
+  vertical-align: middle;
 }
 .faq-item summary::after {
   content: '+';
@@ -692,11 +674,11 @@ em {
 }
 .faq-item[open] summary::after { transform: rotate(45deg); }
 .faq-item p {
-  margin-top: 16px;
-  padding-left: 36px;
+  margin-top: 14px;
+  padding-right: 40px;
   color: var(--ink-soft);
   font-size: 0.92rem;
-  max-width: 600px;
+  max-width: 640px;
 }
 
 /* ==========================================================================
@@ -730,7 +712,19 @@ em {
 
 .contact-copy h2 { font-size: clamp(2rem, 3.8vw, 2.8rem); margin: 14px 0 22px; }
 .contact-copy p { color: var(--ink-soft); max-width: 440px; margin-bottom: 30px; }
-.contact-meta { display: flex; flex-direction: column; gap: 10px; margin-top: 32px; font-size: 0.86rem; color: var(--ink-soft); }
+.contact-wa-meta { font-size: 0.8rem; color: var(--ink-soft); margin: 14px 0 0; }
+/* Selo de confiança */
+.contact-meta { display: flex; flex-direction: column; gap: 12px; margin-top: 34px; font-size: 0.86rem; color: var(--ink-soft); }
+.contact-meta li { position: relative; padding-left: 22px; }
+.contact-meta li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.55em;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--terracotta-soft);
+  border: 1px solid var(--terracotta);
+}
 
 .contact-form {
   display: flex;
