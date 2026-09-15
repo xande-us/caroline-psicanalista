@@ -108,13 +108,13 @@ em {
 .hero-title.reveal { transition-delay: 0.1s; }
 .hero-lede.reveal { transition-delay: 0.28s; }
 .hero-actions.reveal { transition-delay: 0.46s; }
-.hero-trust.reveal { transition-delay: 0.6s; }
+.hero-microcopy.reveal { transition-delay: 0.6s; }
 
-.pain-row:nth-child(2) { transition-delay: 0.08s; }
-.pain-row:nth-child(3) { transition-delay: 0.16s; }
-.pain-row:nth-child(4) { transition-delay: 0.08s; }
-.pain-row:nth-child(5) { transition-delay: 0.16s; }
-.pain-row:nth-child(6) { transition-delay: 0.08s; }
+.recog-card:nth-child(2) { transition-delay: 0.06s; }
+.recog-card:nth-child(3) { transition-delay: 0.12s; }
+.recog-card:nth-child(4) { transition-delay: 0.06s; }
+.recog-card:nth-child(5) { transition-delay: 0.12s; }
+.recog-card:nth-child(6) { transition-delay: 0.18s; }
 
 .step:nth-child(2) { transition-delay: 0.15s; }
 .step:nth-child(3) { transition-delay: 0.3s; }
@@ -297,6 +297,53 @@ em {
   overflow: hidden;
   box-shadow: 0 40px 80px -30px rgba(35, 31, 32, 0.25);
 }
+
+/* Badge de modalidade — sobre o topo da imagem */
+.hero-badge {
+  position: absolute;
+  top: 18px; left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: rgba(254, 252, 250, 0.92);
+  backdrop-filter: blur(6px);
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 40px;
+  box-shadow: 0 8px 24px -12px rgba(35, 31, 32, 0.4);
+}
+
+/* Card de apoio — "Princípio da Escuta", ancorado ao pé da foto */
+.hero-card {
+  position: absolute;
+  right: -18px; bottom: -26px;
+  max-width: 230px;
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 24px 50px -24px rgba(35, 31, 32, 0.3);
+}
+.hero-card-eyebrow {
+  display: block;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.hero-card p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+@media (max-width: 560px) {
+  .hero-card { position: static; max-width: none; margin-top: 40px; }
+}
 .hero-image-mask img {
   width: 165%;
   margin-left: -6%;
@@ -373,22 +420,10 @@ em {
 }
 .btn-outline-ink:hover { background: var(--ink); color: var(--canvas); }
 
-.hero-trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 28px;
-  font-size: 0.76rem;
+.hero-microcopy {
+  font-size: 0.8rem;
   color: var(--ink-soft);
-}
-.hero-trust li { position: relative; padding-left: 14px; }
-.hero-trust li::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 50%;
-  transform: translateY(-50%);
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--terracotta);
+  letter-spacing: 0.01em;
 }
 
 /* ==========================================================================
@@ -412,48 +447,57 @@ em {
 .lede { color: var(--ink-soft); font-size: 1.02rem; }
 
 /* ==========================================================================
-   IDENTIFICAÇÃO — lista em zigue-zague
+   RECONHECIMENTO — cards equivalentes (sem ordem, sem numeração, sem hierarquia)
    ========================================================================== */
-.pain-list { max-width: 900px; margin: 0 auto; }
-
-.pain-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 44px;
-  padding: 46px 0;
-  border-bottom: 1px solid var(--line);
+.recog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
-.pain-row--reverse {
-  flex-direction: row-reverse;
-  text-align: right;
-  margin-left: auto;
+@media (min-width: 640px) {
+  .recog-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
 }
-.pain-row:first-child { padding-top: 0; }
+@media (min-width: 960px) {
+  .recog-grid { grid-template-columns: repeat(3, 1fr); }
+}
 
-.pain-ghost {
-  flex-shrink: 0;
-  width: 90px;
+.recog-card {
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 30px 28px;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.recog-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--terracotta-soft);
+  box-shadow: 0 24px 50px -30px rgba(35, 31, 32, 0.28);
+}
+/* Marcador discreto e idêntico em todos — reforça equivalência, não sequência */
+.recog-card h3 {
+  font-size: 1.12rem;
+  margin-bottom: 12px;
+  padding-top: 14px;
+  position: relative;
+}
+.recog-card h3::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 26px; height: 2px;
+  background: var(--terracotta);
+  border-radius: 2px;
+}
+.recog-card p { color: var(--ink-soft); font-size: 0.94rem; line-height: 1.7; }
+
+.recog-closing {
+  max-width: 620px;
+  margin: 44px auto 0;
+  text-align: center;
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(3rem, 7vw, 4.6rem);
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--terracotta);
-  opacity: 0.55;
-  text-align: center;
-}
-
-.pain-content { max-width: 480px; }
-.pain-content h3 { font-size: 1.2rem; margin-bottom: 10px; font-style: italic; }
-.pain-content p { color: var(--ink-soft); font-size: 0.94rem; }
-
-@media (max-width: 640px) {
-  .pain-row, .pain-row--reverse {
-    flex-direction: row;
-    text-align: left;
-    gap: 24px;
-  }
-  .pain-ghost { width: 60px; font-size: 2.4rem; }
+  font-size: 0.98rem;
+  color: var(--ink-soft);
 }
 
 /* ==========================================================================
