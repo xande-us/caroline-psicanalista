@@ -344,17 +344,13 @@ em {
 @media (max-width: 560px) {
   .hero-card { position: static; max-width: none; margin-top: 40px; }
 }
-/* Enquadramento do hero: a foto (3:4) é ampliada dentro da máscara (4:5) para um
-   recorte de retrato focado na Caroline. O recorte horizontal vem do overflow da
-   largura + margin (em % da máscara, portanto consistente em qualquer viewport);
-   object-position controla o eixo vertical (mais alto = mostra melhor o rosto). */
+/* Enquadramento do hero: foto profissional (2:3) centralizada. A máscara é 4:5,
+   então o cover recorta só na vertical; object-position controla a altura do rosto. */
 .hero-image-mask img {
-  width: 158%;
-  margin-left: -6%;
-  max-width: none;
+  width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
-  object-position: 50% 20%;
+  object-position: 50% 12%;
   will-change: transform;
 }
 .hero-caption {
@@ -524,7 +520,7 @@ em {
   overflow: hidden;
   box-shadow: 0 40px 80px -30px rgba(35, 31, 32, 0.22);
 }
-.encontro-image-mask img { aspect-ratio: 5/6; object-fit: cover; width: 100%; }
+.encontro-image-mask img { aspect-ratio: 5/6; object-fit: cover; width: 100%; object-position: 50% 18%; }
 
 .encontro-lead h2 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); margin: 14px 0 22px; }
 .encontro-open {
