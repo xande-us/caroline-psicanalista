@@ -287,6 +287,9 @@ em {
   grid-template-columns: 1fr;
   gap: 56px;
 }
+/* Texto antes da foto em todas as larguras: no celular, título e CTA na primeira tela */
+.hero-copy { order: 1; }
+.hero-media { order: 2; }
 
 @media (min-width: 900px) {
   .hero-grid {

@@ -59,6 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const updateParallax = () => {
     if (!heroImg || !hero) return;
+    // No celular a foto fica abaixo do texto: o deslocamento abriria um vão no
+    // topo da máscara (e é trabalho de scroll desnecessário em aparelho fraco)
+    if (window.innerWidth < 900) {
+      heroImg.style.transform = '';
+      return;
+    }
     const scrollY = window.scrollY;
     const heroHeight = hero.offsetHeight;
     if (scrollY < heroHeight) {
