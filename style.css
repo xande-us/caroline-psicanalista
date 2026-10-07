@@ -106,7 +106,7 @@ em {
   transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
   will-change: opacity, transform;
 }
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); will-change: auto; }
 
 .hero-title.reveal { transition-delay: 0.1s; }
 .hero-lede.reveal { transition-delay: 0.28s; }
@@ -121,9 +121,6 @@ em {
 
 .facet--b { transition-delay: 0.12s; }
 .facet--c { transition-delay: 0.24s; }
-
-.testimonial:nth-child(2) { transition-delay: 0.15s; }
-.testimonial:nth-child(3) { transition-delay: 0.3s; }
 
 /* ==========================================================================
    FIO CONDUTOR — elemento de assinatura
@@ -170,12 +167,22 @@ em {
   top: 0; left: 0; right: 0;
   z-index: 100;
   padding: 8px 0;
-  transition: background 0.4s ease, backdrop-filter 0.4s ease;
 }
-.site-header.scrolled {
+/* Fundo com blur numa camada própria: backdrop-filter no próprio header viraria
+   o "containing block" do menu mobile (position: fixed), prendendo o menu à
+   altura do header em vez da tela inteira. */
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
   background: rgba(254, 252, 250, 0.88);
+  -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
+  transition: opacity 0.4s ease;
 }
+.site-header.scrolled::before { opacity: 1; }
 
 .header-inner {
   display: flex;
@@ -577,60 +584,6 @@ em {
 }
 
 /* ==========================================================================
-   DEPOIMENTOS — masonry assimétrico
-   ========================================================================== */
-.testimonial-track {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
-}
-@media (min-width: 900px) {
-  .testimonial-track {
-    grid-template-columns: repeat(3, 1fr);
-    align-items: start;
-    gap: 40px;
-  }
-  .testimonial--offset { margin-top: 60px; }
-}
-
-.testimonial {
-  position: relative;
-  padding-top: 34px;
-  border-top: 1px solid var(--line);
-}
-.testimonial-mark {
-  position: absolute;
-  top: -18px; left: 0;
-  font-family: var(--font-display);
-  font-size: 3.2rem;
-  color: var(--terracotta);
-  opacity: 0.4;
-}
-.testimonial p {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.02rem;
-  color: var(--ink);
-  margin-bottom: 18px;
-}
-.testimonial cite {
-  font-size: 0.78rem;
-  color: var(--ink-soft);
-  font-style: normal;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-/* Placeholder — depoimentos reais pendentes de autorização (nunca fabricar) */
-.testimonial--placeholder {
-  border-top-style: dashed;
-  opacity: 0.55;
-}
-.testimonial--placeholder p { font-style: italic; color: var(--ink-soft); }
-.testimonial--placeholder .testimonial-mark { opacity: 0.2; }
-.testimonial--placeholder cite { text-transform: none; letter-spacing: 0.02em; font-style: italic; }
-
-/* ==========================================================================
    FAQ — lista sem caixas
    ========================================================================== */
 .faq-list { max-width: 760px; }
@@ -650,21 +603,6 @@ em {
 }
 .faq-item summary::-webkit-details-marker { display: none; }
 
-/* Resposta ainda pendente de confirmação — placeholder explícito, não conteúdo final */
-.faq-pending { color: var(--ink-soft); font-style: italic; }
-.faq-flag {
-  display: inline-block;
-  margin-left: 6px;
-  font-style: normal;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--terracotta);
-  border: 1px solid var(--terracotta-soft);
-  border-radius: 20px;
-  padding: 2px 9px;
-  vertical-align: middle;
-}
 .faq-item summary::after {
   content: '+';
   margin-left: auto;
