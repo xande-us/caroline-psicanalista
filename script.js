@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
      Envio via Web3Forms (https://web3forms.com). A chave abaixo está vinculada ao
      e-mail da Caroline: é pública por design (só permite ENVIAR para ela), então
      pode ficar no código. Para trocar o e-mail de destino, gere uma nova chave. */
-  const WEB3FORMS_KEY = '';
+  const WEB3FORMS_KEY = '22863098-82d8-4aa5-ab1b-23ccdce547d7';
 
   const form = document.getElementById('contact-form');
   const formNote = document.getElementById('form-note');
