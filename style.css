@@ -429,6 +429,7 @@ em {
   background: transparent;
 }
 .btn-outline-ink:hover { background: var(--ink); color: var(--canvas); }
+.btn:disabled { opacity: 0.6; cursor: wait; }
 
 .hero-microcopy {
   font-size: 0.8rem;

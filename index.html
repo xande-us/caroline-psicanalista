@@ -316,10 +316,11 @@
           </ul>
         </div>
 
-        <!-- PENDENTE: destino do formulário. Aguardando e-mail da Caroline para
-             configurar o backend (Formspree/EmailJS/rota serverless). Enquanto isso,
-             o envio não dispara e-mail real — ver placeholder em script.js. -->
+        <!-- Envio via Web3Forms: as mensagens chegam no e-mail da Caroline, vinculado
+             à chave de acesso em script.js (o e-mail não fica exposto no código). -->
         <form class="contact-form reveal" id="contact-form" novalidate>
+          <!-- Honeypot anti-spam: invisível para pessoas, robôs costumam marcar -->
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display: none;">
           <span class="tag-line">Prefere escrever?</span>
           <h3>Envie uma mensagem reservada</h3>
           <p class="form-sub">

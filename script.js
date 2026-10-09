@@ -111,36 +111,71 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- Formulário de contato ----------
-     PENDENTE: o formulário ainda NÃO envia e-mail de verdade. Falta o e-mail de
-     destino da Caroline para configurar o backend (Formspree/EmailJS/rota
-     serverless). Enquanto isso, apenas exibimos confirmação visual, sem persistir
-     nem enviar os dados. Não conectar a nenhum destino sem o e-mail confirmado. */
+     Envio via Web3Forms (https://web3forms.com). A chave abaixo está vinculada ao
+     e-mail da Caroline: é pública por design (só permite ENVIAR para ela), então
+     pode ficar no código. Para trocar o e-mail de destino, gere uma nova chave. */
+  const WEB3FORMS_KEY = '';
+
   const form = document.getElementById('contact-form');
   const formNote = document.getElementById('form-note');
   const defaultNote = formNote ? formNote.textContent : '';
+  const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+  const defaultBtn = submitBtn ? submitBtn.textContent : '';
+
+  const setNote = (text, color) => {
+    if (!formNote) return;
+    formNote.textContent = text;
+    formNote.style.color = color || '';
+  };
 
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const nome = form.nome.value.trim();
-      const primeiroNome = nome ? nome.split(' ')[0] : '';
+      const email = form.email.value.trim();
+      const mensagem = form.mensagem.value.trim();
 
-      if (formNote) {
-        formNote.textContent = primeiroNome
-          ? `Obrigada, ${primeiroNome}! Assim que o envio estiver ativo, sua mensagem chega direto para a Caroline.`
-          : 'Assim que o envio estiver ativo, sua mensagem chega direto para a Caroline.';
-        formNote.style.color = 'var(--terracotta)';
+      if (!nome || !email || !mensagem) {
+        setNote('Preencha nome, e-mail e mensagem para enviar.', 'var(--terracotta)');
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setNote('Confira o e-mail informado — ele é o caminho para a resposta.', 'var(--terracotta)');
+        form.email.focus();
+        return;
       }
 
-      form.reset();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando…';
+      setNote('');
 
-      // Restaura o microcopy padrão depois de alguns segundos
-      if (formNote) {
-        setTimeout(() => {
-          formNote.textContent = defaultNote;
-          formNote.style.color = '';
-        }, 6000);
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: `Nova mensagem pelo site — ${nome}`,
+            from_name: 'Site Caroline Coconesi',
+            name: nome,
+            email,               // vira o "responder para": a Caroline responde direto ao paciente
+            message: mensagem,
+            botcheck: form.botcheck.checked
+          })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error(data.message || res.status);
+
+        const primeiroNome = nome.split(' ')[0];
+        form.reset();
+        setNote(`Obrigada, ${primeiroNome}! Sua mensagem foi enviada. Responderei pessoalmente em até 24 horas úteis.`, 'var(--terracotta)');
+        setTimeout(() => setNote(defaultNote), 10000);
+      } catch (err) {
+        setNote('Não foi possível enviar agora. Tente novamente em instantes ou chame no WhatsApp.', 'var(--terracotta)');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = defaultBtn;
       }
     });
   }
